@@ -34,7 +34,7 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.6.1</version>
+      <version>6.14.3</version>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
@@ -42,7 +42,6 @@
       <version>4.5.0</version>
       <scope>compile</scope>
     </dependency>
-
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
@@ -66,7 +65,5 @@
       <version>4.5.0</version>
       <scope>compile</scope>
     </dependency>
-
-
   </dependencies>
 </project>
