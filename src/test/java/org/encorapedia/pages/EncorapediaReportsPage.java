@@ -4,56 +4,57 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.util.DateUtil;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
-public class EncorapediaReportsPage {
+public class EncorapediaReportsPage extends EncorapediaBasePage{
+    private By fromDate = By.id("fromDate");
+    private By toDate = By.id("toDate");
+    private By selectedReport = By.id("selectedReport");
+    private By showTypeReport = By.name("reportType");
+    private By viewReportButton = By.className("btn-primary");
+    private DateUtil dateUtil;
 
-    WebDriver driver;
-    By fromDate = By.id("fromDate");
-    By toDate = By.id("toDate");
-    By selectedReport = By.id("selectedReport");
-    By showTypeReport = By.name("reportType");
-    By viewReportButton = By.className("btn-primary");
-
-    //    By topMenu = By.xpath("//div[@id='navbarSupportedContent']");
     public EncorapediaReportsPage(WebDriver driver) {
-        this.driver=driver;
+        super(driver);
     }
 
     public void setFromDate (Date date) {
         WebElement fromDateBox = driver.findElement(fromDate);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy ");
-        String formattedDate = dateFormat.format(date);
-        fromDateBox.sendKeys(formattedDate);
-        System.out.println(formattedDate + " set to fromDate");
+        fromDateBox.sendKeys(dateUtil.formatDate(date));
     }
 
     public void setToDate (Date date) {
         WebElement toDateBox = driver.findElement(toDate);
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy ");
-        String formattedDate = dateFormat.format(date);
-        toDateBox.sendKeys(formattedDate);
-        System.out.println(formattedDate + " set to toDate");
+        toDateBox.sendKeys(dateUtil.formatDate(date));
     }
 
-    public void selectReport(String report){
+    /**
+     * This method selects the report to display based on the string received.
+     * The Select options available:
+     * "Prices report"
+     * "Intenvory report" [sic]
+     * @param report
+     */
+    public void selectReportByVisibleText(String report){
         Select dropdown = new Select(driver.findElement(selectedReport));
         dropdown.selectByVisibleText(report);
     }
 
+    /**
+     * This method selects how the report is going to show.
+     * "full"
+     * "condensed"
+     * @param reportType
+     */
     public void showTypeReport(String reportType) {
-        List<WebElement> radioList = driver.findElements(showTypeReport);
-
-        for (int i = 0; i < radioList.size(); i++) {
-            WebElement radioButton = radioList.get(i);
-            String val = radioButton.getAttribute("value");
-            if (val.equalsIgnoreCase(reportType))
-                radioButton.click();
-            break;
+        Optional<WebElement> radio = driver.findElements(showTypeReport).stream().filter(
+                element -> element.getAttribute("value").equalsIgnoreCase(reportType)).findFirst();
+        if (radio.isPresent()) {
+            radio.get().click();
         }
     }
 

@@ -11,15 +11,14 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EncorapediaResultsPage {
+public class EncorapediaResultsPage extends EncorapediaBasePage {
 
-    WebDriver driver;
-    By sortPricesBy = By.id("sort");
-    By tableRows = By.xpath("//*[@id='results']/table/tbody/tr/td[1]");
-    By totalPrice = By.xpath("//*[@id=\"price-sum\"]");
+    private By sortPricesBy = By.id("sort");
+    private By tableRows = By.xpath("//*[@id='results']/table/tbody/tr");
+    private By totalPrice = By.id("price-sum");
 
     public EncorapediaResultsPage(WebDriver driver) {
-        this.driver=driver;
+        super(driver);
     }
 
     public void selectSortPricesBy(String sortBy){
