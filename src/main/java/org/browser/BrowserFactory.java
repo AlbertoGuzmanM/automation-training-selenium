@@ -7,16 +7,21 @@ public class BrowserFactory {
 
     public static WebDriver getBrowser(String browser) throws BrowserException {
         browser = browser.trim();
-        if("chrome".equals(browser)) {
-            driver= new Chrome().createInstance();
-        }else if("edge".equals(browser)){
-            driver= new Edge().createInstance();
-        }else if("firefox".equals(browser)) {
-            driver = new Firefox().createInstance();
-        } else if ("safari".equals(browser)) {
-            driver = new Safari().createInstance();
-        }else{
-            throw new BrowserException(browser+"is not supported");
+        switch (browser) {
+            case "chrome":
+                driver = new Chrome().createInstance();
+                break;
+            case "firefox":
+                driver = new Firefox().createInstance();
+                break;
+            case "safari":
+                driver = new Safari().createInstance();
+                break;
+            case "edge":
+                driver = new Edge().createInstance();
+                break;
+            default:
+                throw new BrowserException(browser + "is not supported");
         }
         return driver;
     }

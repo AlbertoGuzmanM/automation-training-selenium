@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class Firefox implements Browser{
     @Override
     public WebDriver createInstance() {
-        WebDriverManager.firefoxdriver().setup();;
+        WebDriverManager.firefoxdriver().setup();
         return new FirefoxDriver();
     }
 }

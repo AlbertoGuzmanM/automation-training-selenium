@@ -3,9 +3,12 @@ package org.encorapedia.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.util.DateUtil;
 
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -24,11 +27,16 @@ public class EncorapediaReportsPage extends EncorapediaBasePage{
 
     public void setFromDate (Date date) {
         WebElement fromDateBox = driver.findElement(fromDate);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(fromDateBox));
+        fromDateBox.clear();
         fromDateBox.sendKeys(dateUtil.formatDate(date));
     }
 
     public void setToDate (Date date) {
         WebElement toDateBox = driver.findElement(toDate);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(toDateBox));
         toDateBox.sendKeys(dateUtil.formatDate(date));
     }
 

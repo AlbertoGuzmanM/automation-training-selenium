@@ -2,10 +2,11 @@ package org.encorapedia.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class EncorapediaBasePage {
 
-    WebDriver driver;
+    protected WebDriver driver;
 
     private By homeLink = By.linkText("Home");
     private By inventoryLink = By.linkText("Inventory");
@@ -17,13 +18,13 @@ public class EncorapediaBasePage {
     public void clickOnReports() {
         driver.findElement(reportsLink).click();
     }
-    public By getHomeLink() {
-        return homeLink;
+    public WebElement getHomeWE() {
+        return  driver.findElement(homeLink);
     }
-    public By getInventoryLink() {
-        return inventoryLink;
+    public WebElement getInventoryWE() {
+        return driver.findElement(inventoryLink);
     }
-    public By getReportsLink() {
-        return reportsLink;
+    public WebElement getReportsWE() {
+        return driver.findElement(reportsLink);
     }
 }
