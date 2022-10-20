@@ -11,8 +11,7 @@ public final class DateUtil {
 
     public static String formatDate(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy ");
-        String formattedDate = dateFormat.format(date);
-        return formattedDate;
+        return dateFormat.format(date);
     }
 
 }
